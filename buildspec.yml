@@ -20,6 +20,9 @@ phases:
       - git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${DOCKER_COMPOSER_REPO}
       - git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${COMPOSE_REPO_NAME}
       - pip install -r ${DOCKER_COMPOSER_REPO}/requirements.txt
+      - ls ${CODEBUILD_SRC_DIR_DockerImage}
+      - IMAGE_URI=`cat ${CODEBUILD_SRC_DIR_DockerImage}/imageDetails.json | jq -r .ImageURI`
+      - echo $IMAGE_URI
 
   pre_build:
     commands:
