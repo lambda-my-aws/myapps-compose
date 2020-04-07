@@ -14,15 +14,15 @@ phases:
     runtime-versions:
       python: 3.8
     commands:
-      - pip --version || curl -s https://bootstrap.pypa.io/get-pip.py | python
+      - ls ${CODEBUILD_SRC_DIR_DockerImage}
+      - IMAGE_URI=`cat ${CODEBUILD_SRC_DIR_DockerImage}/imageDetails.json | jq -r .ImageURI`
+      - echo $IMAGE_URI      - pip --version || curl -s https://bootstrap.pypa.io/get-pip.py | python
       - git config --global user.email build@lambda-my-aws.io
       - git config --global user.name codebuild
       - git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${DOCKER_COMPOSER_REPO}
       - git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${COMPOSE_REPO_NAME}
       - pip install -r ${DOCKER_COMPOSER_REPO}/requirements.txt
-      - ls ${CODEBUILD_SRC_DIR_DockerImage}
-      - IMAGE_URI=`cat ${CODEBUILD_SRC_DIR_DockerImage}/imageDetails.json | jq -r .ImageURI`
-      - echo $IMAGE_URI
+
 
   pre_build:
     commands:
