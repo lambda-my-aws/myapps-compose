@@ -18,6 +18,7 @@ phases:
       - git config --global user.email build@lambda-my-aws.io
       - git config --global user.name codebuild
       - git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${DOCKER_COMPOSER_REPO}
+      - git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${COMPOSE_REPO_NAME}
       - pip install -r ${DOCKER_COMPOSER_REPO}/requirements.txt
 
   pre_build:
@@ -31,13 +32,10 @@ phases:
 
   build:
     commands:
-      - python ${DOCKER_COMPOSER_REPO}/update_docker_composex.py --source-file $SOURCE_DOCKER_FILE --parameters-file ${IMAGE_INFO_PATH} --output-file /tmp/compose.yml
-
+      - python ${DOCKER_COMPOSER_REPO}/update_docker_composex.py --source-file $SOURCE_DOCKER_FILE --parameters-file ${IMAGE_INFO_PATH} --output-file ${COMPOSE_REPO_NAME}/compose.yml
   post_build:
     commands:
-      - git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${COMPOSE_REPO_NAME}
-      - cp /tmp/compose.yml .
-      - git add -u && git commit -m "Build $CODEBUILD_BUILD_NUMBER - $CODEBUILD_BUILD_ID" && git push origin master
+      - cd ${COMPOSE_REPO_NAME} && git add -u && git commit -m "Build $CODEBUILD_BUILD_NUMBER - $CODEBUILD_BUILD_ID" && git push origin master
 
 artifacts:
   files:
