@@ -3,7 +3,6 @@ version: 0.2
 env:
   variables:
     SOURCE_DOCKER_FILE: compose.yml
-    DEST_DOCKER_FILE: compose.yml
     IMAGE_BUILD_ARTIFACT_NAME: ImageBuild
     IMAGE_INFO_FILE_NAME: build_info.yml
     DOCKER_COMPOSER_REPO: docker-composerx
@@ -32,11 +31,12 @@ phases:
 
   build:
     commands:
-      - python ${DOCKER_COMPOSER_REPO}/update_docker_composex.py --source-file $SOURCE_DOCKER_FILE --parameters-file ${IMAGE_INFO_PATH}
+      - python ${DOCKER_COMPOSER_REPO}/update_docker_composex.py --source-file $SOURCE_DOCKER_FILE --parameters-file ${IMAGE_INFO_PATH} --output-file /tmp/compose.yml
 
   post_build:
     commands:
-      - git init . && git remote add origin https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${COMPOSE_REPO_NAME}
+      - git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/${COMPOSE_REPO_NAME}
+      - cp /tmp/compose.yml .
       - git add -u && git commit -m "Build $CODEBUILD_BUILD_NUMBER - $CODEBUILD_BUILD_ID" && git push origin master
 
 artifacts:
