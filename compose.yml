@@ -43,7 +43,7 @@ services:
   app03:
     environment:
       NAME: timeteller
-    image: 373709687836.dkr.ecr.eu-west-1.amazonaws.com/blog-app-03:sha256:1b29c22754c110c6008bfb7f94ca3f8b2033d37f8fd10211042380827d4aa497
+    image: 373709687836.dkr.ecr.eu-west-1.amazonaws.com/blog-app-03@sha256:5951fb3dc194f814daf4e3503fd82382ed624b35667d49d9d386ed502b6754e6
     labels:
       healthcheck:
         http: 80/
