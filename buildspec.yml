@@ -23,7 +23,7 @@ phases:
 
   build:
     commands:
-      - ecs_composex --create-vpc --create-cluster --bucket-name ${CFN_TPL_BUCKET} -f compose.yml -o outputs/composex_root.yml
+      - ecs_composex --create-vpc --create-cluster --single-nat --bucket-name ${CFN_TPL_BUCKET} -f compose.yml -o outputs/composex_root.yml
 
 artifacts:
   files:
