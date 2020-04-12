@@ -31,7 +31,7 @@ services:
   app01:
     environment:
       NAME: DISPATCH
-    image: 373709687836.dkr.ecr.eu-west-1.amazonaws.com/blog-app-01@sha256:c86a43b32ab4c920e87208d3d473a0dbe0771ce9c86abb3bca786c82c427a18f
+    image: 373709687836.dkr.ecr.eu-west-1.amazonaws.com/blog-app-01@sha256:0bf30cce6c4a58a9d494cd2dcada2c102a9d92e449059ca3d2d7d8c15980cc55
     links:
     - app03
     ports:
