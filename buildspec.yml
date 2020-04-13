@@ -13,7 +13,7 @@ phases:
       - pip --version || curl -s https://bootstrap.pypa.io/get-pip.py | python
       - git config --global user.email build@lambda-my-aws.io
       - git config --global user.name codebuild
-      - pip install ecs-composex==0.1.2
+      - pip install git+https://github.com/lambda-my-aws/ecs_composex@master#egg-info=ecs-composex
 
 
   pre_build:
@@ -23,7 +23,8 @@ phases:
 
   build:
     commands:
-      - ecs_composex --create-vpc --create-cluster --single-nat --bucket-name ${CFN_TPL_BUCKET} -f compose.yml -o outputs/composex_root.yml
+      - ecs_composex --create-vpc --create-cluster --single-nat --bucket-name ${CFN_TPL_BUCKET} -f compose.yml -o outputs/composex_dev.yml
+      - ecs_composex --bucket-name ${CFN_TPL_BUCKET} -f compose.yml -o outputs/composex_prod.yml
 
 artifacts:
   files:

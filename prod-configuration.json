@@ -2,10 +2,10 @@
   "Parameters" : {
     "VpcId" : "vpc-0224f562ec65d1d46",
     "AppSubnets": "subnet-035f33435dfe8b950,subnet-08aa089d7b0c9c806,subnet-07bf94fb9952a16ab",
-    "PublicSubnets": "subnet-056d1f5f3e836ee88,subnet-00b6cae7cc7834d5d,subnet-031c1166f0e53f67",
+    "PublicSubnets": "subnet-056d1f5f3e836ee88,subnet-00b6cae7cc7834d5d,subnet-031c1166f0e53f671",
     "StorageSubnets": "subnet-026edefbe7cd6f626,subnet-0225326e7ecc03e73,subnet-029e42805312f5d12",
     "VpcDiscoveryMapId": "ns-g6bqjivabdy7dg3j",
-    "ClusterName": "production"
+    "EcsClusterName": "production"
 
   },
   "Tags" : {
